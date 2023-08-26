@@ -1,28 +1,20 @@
-import styles from "./Card.module.css";
 import Image from "next/image";
+import Button from "./Button";
 
-const Card = () => {
+interface Props {
+  title: string;
+  imgSrc: string;
+}
+
+const Card = ({ title, imgSrc }: Props) => {
   return (
-    <div className={styles.card}>
-      <Image
-        src="/../../influenza.jpg"
-        alt="influenza"
-        width={400}
-        height={250}
-      />
-      <div className={styles.cardBody}>
-        <h3>The Importance of the Influenza Vaccine</h3>
-        <p>
-          Defend yourself and those around you against the seasonal flu with the
-          Influenza Vaccine. Influenza, commonly known as the flu, is a
-          contagious respiratory illness that can lead to severe symptoms and
-          complications. The influenza vaccine is a crucial preventive measure
-          that helps reduce the risk of infection and its associated
-          complications. It's particularly important for vulnerable populations,
-          such as the elderly, young children, and individuals with underlying
-          health conditions. Take action today to safeguard your health and the
-          well-being of your loved ones.
-        </p>
+    <div className="w-min-[90%] max-w-[300px] mx-auto overflow-hidden shadow-md rounded-2xl hover:scale-[1.02] duration-200">
+      <Image src={imgSrc} alt={title} width={400} height={250} />
+      <div className="px-8 py-6">
+        <h3 className="mb-6 font-medium">{title}</h3>
+        <Button variant={"outlined"} size={"base"} href="/">
+          More detail
+        </Button>
       </div>
     </div>
   );

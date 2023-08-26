@@ -1,30 +1,19 @@
-import Image from "next/image";
-import styles from "./Navbar.module.css";
 import Button from "./Button";
+import Link from "next/link";
+import Logo from "./Logo";
 
 const Navbar = () => {
   return (
-    <nav className={styles.nav}>
-      <div className={styles.logoContainer}>
-        <Image
-          src="/../logo.png"
-          alt="Moh Prompt Mak logo"
-          width="40"
-          height="40"
-        />
-        <div>
-          <p className={styles.logoHeading}>MPM</p>
-          <p className={styles.logoParagraph}>Moh Promt Mak</p>
-        </div>
-      </div>
+    <nav className="fixed w-full z-10 bg-white">
+      <div className="flex items-center justify-between px-28 py-3 shadow-md">
+        <ul className="flex list-none gap-12 items-center text-gray-700 text-sm ml-auto">
+          <li className="hover:text-blue-500 cursor-pointer">
+            <Link href="/booking">Booking</Link>
+          </li>
 
-      <ul className={styles.menu}>
-        <li>Home</li>
-        <li>Platforms</li>
-        <li>Statistics</li>
-        <li>About</li>
-        <Button>Contact Us</Button>
-      </ul>
+          <Logo />
+        </ul>
+      </div>
     </nav>
   );
 };

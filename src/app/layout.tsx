@@ -1,9 +1,9 @@
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"], weight: ["400", "700"] });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Moh Promt Mak",
@@ -18,7 +18,10 @@ interface Props {
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="en">
-      <body className={(inter.className, poppins.className)}>{children}</body>
+      <body className={inter.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 };

@@ -1,27 +1,38 @@
 import Image from "next/image";
 import Button from "./Button";
-import styles from "./Banner.module.css";
 
 const Banner = () => {
   return (
-    <section className={`${styles.gridTwoCols} ${styles.banner}`}>
+    <section className="grid grid-cols-2 px-28 py-20 mt-[80px]">
       <div>
-        <p className={styles.bannerSub}>#1 vaccine booking app</p>
-        <h1>Moh Promt Mak</h1>
-        <p className={styles.bannerDesc}>
-          Simplify vaccine booking across Thailand with our user-friendly app.
-          Choose center, date, and time all in one place. Secure your
-          vaccination slot effortlessly and contribute to a safer future.
+        <p className="mb-4 bg-blue-100 rounded-full py-2 px-4 shadow-md max-w-max text-xs text-blue-500 uppercase">
+          #1 vaccine booking app
         </p>
-        <Button>Book Now</Button>
+        <h1 className="text-6xl font-extrabold my-8 capitalize">
+          Moh Promt Mak
+        </h1>
+        <p className="text-md text-gray-500 mb-14">
+          Simplify vaccine booking across Thailand with our user-friendly app.
+          <br />
+          Choose center, date, and time all in one place.
+          <br />
+          Secure your vaccination slot effortlessly and contribute to a safer
+          future.
+        </p>
+        <Button variant="filled" size="lg" href="/booking">
+          Booking
+        </Button>
+        <Button variant="outlined" size="lg" className="ml-4" href="">
+          Learn More
+        </Button>
       </div>
 
       <Image
-        src="/../../vaccine.jpg"
-        className={styles.bannerImg}
-        alt=""
-        width={600}
-        height={400}
+        src="/../../img/vaccine.jpg"
+        className="rounded-xl shadow-xl hover:scale-[1.01] duration-200 justify-self-end"
+        alt="A woman get vaccinated."
+        width={500}
+        height={300}
         objectFit="contain"
       />
     </section>
