@@ -1,7 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Button from "./Button";
+import { useState } from "react";
+import { bannerImages } from "@/data/bannerImages";
 
 const Banner = () => {
+  const [imageIndex, setImageIndex] = useState(0);
+
   return (
     <section className="grid grid-cols-2 px-28 py-20 mt-[80px]">
       <div>
@@ -28,12 +34,14 @@ const Banner = () => {
       </div>
 
       <Image
-        src="/../../img/vaccine.jpg"
+        onClick={() => {
+          setImageIndex((prev) => (prev + 1) % 4);
+        }}
+        src={bannerImages[imageIndex]}
         className="rounded-xl shadow-xl hover:scale-[1.01] duration-200 justify-self-end"
         alt="A woman get vaccinated."
         width={500}
         height={300}
-        objectFit="contain"
       />
     </section>
   );

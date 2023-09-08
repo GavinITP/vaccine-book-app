@@ -1,6 +1,5 @@
 import Banner from "@/components/Banner";
-import Card from "@/components/Card";
-import { HospitalType, hospitalsData } from "@/data/hospitals";
+import CardPanel from "@/components/CardPanel";
 
 const Home = () => {
   return (
@@ -10,11 +9,7 @@ const Home = () => {
         <h2 className="text-center mt-8 mb-16 capitalize font-bold">
           Hospitals
         </h2>
-        <div className="grid grid-cols-3">
-          {hospitalsData.map(({ title, imgSrc }: HospitalType) => (
-            <Card title={title} imgSrc={imgSrc} />
-          ))}
-        </div>
+        <CardPanel />
       </main>
     </>
   );
