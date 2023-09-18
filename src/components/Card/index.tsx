@@ -18,8 +18,8 @@ const Card = ({ title, imgSrc, onRate, rating }: Props) => {
         <Rating
           name="hospital rating"
           value={rating}
+          onClick={(e) => e.stopPropagation()}
           onChange={(e, newValue) => {
-            e.stopPropagation();
             onRate(title, newValue);
           }}
         />

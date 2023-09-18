@@ -3,6 +3,7 @@
 import { HospitalType, hospitalsData } from "@/data/hospitals";
 import Card from "./Card/";
 import { useReducer } from "react";
+import Link from "next/link";
 
 interface Action {
   type: "add" | "remove";
@@ -33,19 +34,21 @@ const cardPanel = () => {
   return (
     <>
       <div className="grid grid-cols-3">
-        {hospitalsData.map(({ title, imgSrc }: HospitalType) => (
-          <Card
-            title={title}
-            imgSrc={imgSrc}
-            rating={state.get(title) || 0}
-            onRate={(title: string, rating: number) =>
-              dispatch({
-                type: "add",
-                hospitalName: title,
-                rating: rating,
-              })
-            }
-          />
+        {hospitalsData.map(({ hid, title, imgSrc }: HospitalType) => (
+          <Link href={`/hospital/${hid}`} key={hid}>
+            <Card
+              title={title}
+              imgSrc={imgSrc}
+              rating={state.get(title) || 0}
+              onRate={(title: string, rating: number) =>
+                dispatch({
+                  type: "add",
+                  hospitalName: title,
+                  rating: rating,
+                })
+              }
+            />
+          </Link>
         ))}
       </div>
 
