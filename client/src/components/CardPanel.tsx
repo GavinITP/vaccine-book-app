@@ -1,9 +1,11 @@
 "use client";
 
-import { HospitalType, hospitalsData } from "@/data/hospitals";
+import { HospitalJsonType } from "./HospitalCatalog";
 import Card from "./Card/";
-import { useReducer } from "react";
+import { useReducer, useEffect, useState } from "react";
 import Link from "next/link";
+
+import getHospitals from "@/libs/getHospitals";
 
 interface Action {
   type: "add" | "remove";
@@ -30,16 +32,32 @@ const reducer = (state: Map<string, number>, action: Action) => {
 
 const cardPanel = () => {
   const [state, dispatch] = useReducer(reducer, new Map<string, number>());
+  const [hospitalResponse, setHospitalResponse] = useState<HospitalJsonType>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const hospitals = await getHospitals();
+      setHospitalResponse(hospitals);
+    };
+
+    fetchData();
+  }, []);
+
+  if (!hospitalResponse)
+    return <p className="text-center">Hospital Card Panel is loading...</p>;
+
+  const { data } = hospitalResponse;
 
   return (
     <>
+      <p className="mb-16 text-center font-bold text-2xl">Test Card Panel</p>
       <div className="grid grid-cols-3">
-        {hospitalsData.map(({ hid, title, imgSrc }: HospitalType) => (
-          <Link href={`/hospital/${hid}`} key={hid}>
+        {data.map(({ _id, name, picture }) => (
+          <Link href={`/hospital/${_id}`} key={_id}>
             <Card
-              title={title}
-              imgSrc={imgSrc}
-              rating={state.get(title) || 0}
+              title={name}
+              imgSrc={picture}
+              rating={state.get(name) || 0}
               onRate={(title: string, rating: number) =>
                 dispatch({
                   type: "add",
