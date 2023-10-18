@@ -2,7 +2,7 @@ import HospitalCatalog from "@/components/HospitalCatalog";
 import getHospitals from "@/libs/getHospitals";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
-import CardPanel from "@/components/CardPanel";
+// import CardPanel from "@/components/CardPanel";
 
 const Hospital = () => {
   const hospitals = getHospitals();

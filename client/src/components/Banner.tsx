@@ -4,10 +4,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { bannerImages } from "@/data/bannerImages";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Banner = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   return (
     <section className="grid grid-cols-2 gap-40 px-28 py-20 mt-[80px]">
@@ -23,9 +26,15 @@ const Banner = () => {
       />
 
       <div className="relative">
-        <p className="mb-4 bg-blue-100 rounded-full py-2 px-4 shadow-md max-w-max text-xs text-blue-500 uppercase">
-          #1 vaccine booking app
-        </p>
+        <div className="flex">
+          <p className="mb-4 bg-blue-100 rounded-full py-2 px-4 shadow-md max-w-max text-xs text-blue-500 uppercase">
+            #1 vaccine booking app
+          </p>
+
+          {session ? (
+            <p className="mx-10 my-1 font-light">Hello {session.user?.name} </p>
+          ) : null}
+        </div>
         <h1 className="text-6xl font-extrabold my-8 capitalize">
           Moh Promt Mak
         </h1>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant: "outlined" | "filled";
   size: "base" | "lg";
   className?: string;
@@ -18,11 +18,13 @@ const Button = ({ children, variant, size, className, href }: Props) => {
     size === "base" ? "text-sm px-4 py-2" : "text-base px-5 py-2";
 
   return (
-    <button
-      className={`${variantStyle} ${sizeStyle} ${className} rounded-lg hover:scale-105 hover:transition-transform`}
-    >
-      <Link href={href}>{children}</Link>
-    </button>
+    <Link href={href}>
+      <button
+        className={`${variantStyle} ${sizeStyle} ${className} rounded-lg hover:scale-105 hover:transition-transform`}
+      >
+        {children}
+      </button>
+    </Link>
   );
 };
 

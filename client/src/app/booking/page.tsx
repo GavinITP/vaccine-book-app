@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Button,
   FormControl,
@@ -13,10 +11,27 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
-const Booking = () => {
+import { getServerSession } from "next-auth";
+import getUserProfile from "@/libs/getUserProfile";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+
+const Booking = async () => {
+  const session = await getServerSession(authOptions);
+  // if (!session || session.user.token) return null;
+
+  const profile = await getUserProfile(session.user.token);
+  const createdAt = new Date(profile.data.createdAt);
+
   return (
     <div className="mt-28 px-28">
-      <h2 className="font-bold mb-8 text-center">Booking</h2>
+      <h2 className="font-bold mb-8 text-center">Profile</h2>
+
+      <p>Name: {profile.data.name}</p>
+      <p>Email: {profile.data.email}</p>
+      <p>Tel: {profile.data.tel}</p>
+      <p>Member Since: {createdAt.toString()}</p>
+
+      {/* <h2 className="font-bold mb-8 text-center">Booking</h2>
 
       <form className="bg-white shadow-lg rounded-2xl px-10 py-14 mb-4 w-full max-w-2xl mx-auto">
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -93,7 +108,7 @@ const Booking = () => {
             Submit
           </Button>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 };

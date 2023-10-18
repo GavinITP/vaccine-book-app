@@ -2,6 +2,9 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import NextAuthProvider from "@/providers/NextAuthProvider";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,12 +18,16 @@ interface Props {
   children: React.ReactNode;
 }
 
-const RootLayout = ({ children }: Props) => {
+const RootLayout = async ({ children }: Props) => {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <NextAuthProvider session={session}>
+          <Navbar />
+          {children}
+        </NextAuthProvider>
       </body>
     </html>
   );
