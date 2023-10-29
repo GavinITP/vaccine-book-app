@@ -10,16 +10,21 @@ const Navbar = async () => {
   return (
     <nav className="fixed w-full z-10 bg-white">
       <div className="flex items-center justify-between px-28 py-3 shadow-md">
-        {session ? (
-          <Button variant="outlined" size="base" href="/api/auth/signout">
-            Sign out of {session.user?.name}
-          </Button>
-        ) : (
-          <Button variant="filled" size="base" href="/api/auth/signin">
-            Sign in
-          </Button>
-        )}
+        <div className="flex gap-4">
+          {session ? (
+            <Button variant="outlined" size="base" href="/api/auth/signout">
+              Sign out of {session.user?.name}
+            </Button>
+          ) : (
+            <Button variant="filled" size="base" href="/api/auth/signin">
+              Sign in
+            </Button>
+          )}
 
+          <Button variant="filled" size="base" href="/mybooking">
+            My Booking
+          </Button>
+        </div>
         <ul className="flex list-none gap-12 items-center text-gray-700 text-sm ml-auto">
           <li className="hover:text-blue-500 cursor-pointer">
             <Link href="/booking">Booking</Link>
