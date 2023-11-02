@@ -4,16 +4,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeBooking } from "../../redux/features/bookSlice";
 import { RootState } from "@/redux/store";
-import { BookingItem } from "../../../interfaces";
 import Button from "@/components/Button";
 
 const MyBooking = () => {
   const bookItems = useSelector((state: RootState) => state.book.bookItems);
   const dispatch = useDispatch();
-
-  const handleDelete = () => {
-    dispatch(removeBooking());
-  };
 
   return (
     <div className="flex flex-col items-center text-center py-4">

@@ -2,10 +2,18 @@ import HospitalCatalog from "@/components/HospitalCatalog";
 import getHospitals from "@/libs/getHospitals";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
-// import CardPanel from "@/components/CardPanel";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import getUserProfile from "@/libs/getUserProfile";
+import AddHospitalForm from "@/components/AddHospitalForm";
 
-const Hospital = () => {
+const Hospital = async () => {
   const hospitals = getHospitals();
+
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user.token) return null;
+
+  const profile = await getUserProfile(session.user.token);
 
   return (
     <main className="py-28">
@@ -18,11 +26,9 @@ const Hospital = () => {
         }
       >
         <HospitalCatalog hospitalJson={hospitals} />
-      </Suspense>
 
-      {/* <div className="my-40">
-        <CardPanel />
-      </div> */}
+        {profile.data.role === "admin" ? <AddHospitalForm /> : null}
+      </Suspense>
     </main>
   );
 };
