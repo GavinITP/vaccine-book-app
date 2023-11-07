@@ -23,6 +23,7 @@ interface Props {
 
 const HospitalCatalog = async ({ hospitalJson }: Props) => {
   const hospitalJsonReady = await hospitalJson;
+
   const { count, data } = hospitalJsonReady;
 
   return (
